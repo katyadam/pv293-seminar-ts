@@ -10,8 +10,6 @@ import { AccountsService } from './accounts.service';
 import { AccountDto, CreateAccountDto } from './dto/zod-dtos';
 
 @ApiTags('accounts')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}

@@ -1,18 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@repo/typescript-config/nestjs.json",
-  "include": [
-    "src/**/*",
-    "test/**/*",
-    "scripts/**/*"
-  ],
-  "exclude": [
-    "src/modules/users/repositories/in-memory-users.repository.ts"
-  ],
+  "include": ["src/**/*", "test/**/*", "scripts/**/*"],
+  "exclude": ["src/modules/users/repositories/in-memory-users.repository.ts"],
   "compilerOptions": {
-    "typeRoots": [
-      "./node_modules/@types/",
-      "./src/common/types/",
-    ]
+    "typeRoots": ["./node_modules/@types/", "./src/common/types/"]
   }
 }

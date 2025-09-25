@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { AccountDto, CreateAccountDto } from './dto/zod-dtos';
-import { v4 as uuidv4 } from 'uuid';
 type UserId = string;
 
 @Injectable()
 export class AccountsService {
   private accountMap: Map<UserId, AccountDto[]>;
-
+  private idGen: number;
   constructor() {
     this.accountMap = new Map();
+    this.idGen = 0;
   }
 
   findAll(): AccountDto[] {
@@ -21,12 +21,13 @@ export class AccountsService {
 
   save(account: CreateAccountDto): AccountDto {
     const newAccount = new AccountDto(
-      uuidv4(),
+      this.idGen.toString(),
       account.name,
       account.userId,
       new Date(),
       new Date(),
     );
+    this.idGen += 1;
     if (this.accountMap.has(account.userId)) {
       this.accountMap.get(account.userId)?.push(newAccount);
     } else {
