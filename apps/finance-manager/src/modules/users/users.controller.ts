@@ -26,13 +26,18 @@ import {
 } from '@nestjs/swagger';
 import { User } from './decorators/user.decorator';
 import { RequestUserEntity } from './entities/user.entity';
+import { AccountDto } from '../accounts/dto/zod-dtos';
+import { AccountsService } from '../accounts/accounts.service';
 
 @ApiTags('users')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly accountsService: AccountsService,
+  ) {}
 
   @Get('profile')
   @ApiOperation({ summary: 'Get current user profile' })
@@ -107,5 +112,11 @@ export class UsersController {
   @ApiResponse({ status: 403, description: 'Forbidden' })
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+
+  @Get(':id/accounts')
+  @ApiResponse({ status: 200, description: "Return the user's accounts" })
+  findUsersAccounts(@Param('id') id: string): Promise<AccountDto[]> {
+    return this.accountsService.findAllByUserId(id);
   }
 }
