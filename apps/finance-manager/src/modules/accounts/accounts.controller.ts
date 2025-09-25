@@ -20,13 +20,13 @@ export class AccountsController {
   @ApiOperation({ summary: 'Get all accounts' })
   @ApiResponse({ status: 200, description: 'Return all accounts' })
   getAccounts(): Promise<AccountDto[]> {
-    return this.accountsService.findAll();
+    return Promise.resolve(this.accountsService.findAll());
   }
 
   @Post('')
   @ApiOperation({ summary: 'Create new account' })
   @ApiResponse({ status: 200, description: 'Created account' })
   createAccount(@Body() accountDto: CreateAccountDto): Promise<AccountDto> {
-    return this.accountsService.save(accountDto);
+    return Promise.resolve(this.accountsService.save(accountDto));
   }
 }

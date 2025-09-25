@@ -11,15 +11,15 @@ export class AccountsService {
     this.accountMap = new Map();
   }
 
-  async findAll(): Promise<AccountDto[]> {
+  findAll(): AccountDto[] {
     return Array.from(this.accountMap.values()).flat();
   }
 
-  async findAllByUserId(userId: string): Promise<AccountDto[]> {
+  findAllByUserId(userId: string): AccountDto[] {
     return this.accountMap[userId];
   }
 
-  async save(account: CreateAccountDto): Promise<AccountDto> {
+  save(account: CreateAccountDto): AccountDto {
     const newAccount = new AccountDto(
       uuidv4(),
       account.name,
