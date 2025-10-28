@@ -117,6 +117,6 @@ export class UsersController {
   @Get(':id/accounts')
   @ApiResponse({ status: 200, description: "Return the user's accounts" })
   findUsersAccounts(@Param('id') id: string): Promise<AccountDto[]> {
-    return this.accountsService.findAllByUserId(id);
+    return Promise.resolve(this.accountsService.findAllByUserId(id));
   }
 }
