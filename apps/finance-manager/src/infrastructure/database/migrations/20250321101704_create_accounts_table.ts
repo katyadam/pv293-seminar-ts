@@ -1,7 +1,6 @@
 import { Kysely, sql } from 'kysely';
 import { DB } from '../../../shared/types/db';
 
- 
 export async function up(db: Kysely<DB>): Promise<void> {
   await db.schema
     .createTable('accounts')
@@ -36,8 +35,7 @@ export async function up(db: Kysely<DB>): Promise<void> {
     .execute();
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function down(db: Kysely<any>): Promise<void> {
+export async function down(db: Kysely<DB>): Promise<void> {
   await db.schema.dropIndex('accounts_user_id_idx').execute();
   await db.schema.dropTable('accounts').execute();
 }
