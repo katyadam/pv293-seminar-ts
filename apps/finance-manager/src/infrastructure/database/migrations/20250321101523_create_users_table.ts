@@ -1,4 +1,5 @@
 import { Kysely, sql } from 'kysely';
+import { DB } from '../../../shared/types/db';
 
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema.createType('user_role').asEnum(['admin', 'user']).execute();
